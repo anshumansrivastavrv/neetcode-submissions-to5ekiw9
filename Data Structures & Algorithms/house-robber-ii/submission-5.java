@@ -1,0 +1,24 @@
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length==1)return nums[0];
+
+        return Math.max(helper(Arrays.copyOfRange(nums,1,nums.length)),
+        helper(Arrays.copyOfRange(nums,0,nums.length-1)));
+    }
+
+    private int helper(int[] nums){
+        if(nums.length==0)return 0;
+        if(nums.length==1)return nums[0];
+
+        int p2=nums[0];
+        int p1=Math.max(nums[0],nums[1]);
+
+        for(int i=2;i<nums.length;i++){
+            int curr=Math.max(p2+nums[i],p1);
+            p2=p1;
+            p1=curr;
+        }
+
+        return p1;
+    }
+}
